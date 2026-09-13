@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+  <title>Es un 10, pero...</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <section id="screen-rules" class="screen active">
+    <div class="content">
+      <h1>Es un 10, pero&hellip;</h1>
+      <p class="subtitle">Un juego de fiesta con una baraja de cartas</p>
+
+      <ol class="rules">
+        <li>Un jugador pulsa <strong>Jugar</strong> y recibe una carta oculta &mdash; un número del 1 al 10.</li>
+        <li>Solo el resto de la sala ve la carta. ¡El jugador no debe mirar!</li>
+        <li>La sala describe a una persona que sería un <strong>10</strong> perfecto, pero con un defecto: <em>"Es un 10, pero odia a tu familia."</em></li>
+        <li>Según el defecto, el jugador adivina cuál es el número real de la carta: <em>"Entonces es un 5."</em></li>
+        <li>Descubre la carta para ver cómo de cerca estuvo, ¡y pasa el teléfono para jugar de nuevo!</li>
+      </ol>
+
+      <button id="btn-play" class="btn btn-primary">Jugar</button>
+    </div>
+  </section>
+
+  <section id="screen-game" class="screen">
+    <div class="content">
+      <div class="card-area">
+        <div class="card-stage">
+          <div id="card" class="flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-face flip-card-back">
+                <div class="back-frame">
+                  <div class="back-emblem">★</div>
+                </div>
+              </div>
+              <div class="flip-card-face flip-card-front">
+                <span id="card-corner-top" class="card-corner"></span>
+                <span id="card-value" class="card-value"></span>
+                <span id="card-corner-bottom" class="card-corner"></span>
+              </div>
+            </div>
+            <div id="countdown-overlay" class="countdown-overlay">
+              <span id="countdown-number">3</span>
+            </div>
+          </div>
+        </div>
+        <p id="reveal-countdown" class="reveal-countdown"></p>
+      </div>
+
+      <p id="game-hint" class="hint"></p>
+
+      <div class="button-row">
+        <button id="btn-flip" class="btn btn-primary">Girar carta</button>
+        <button id="btn-reflip" class="btn btn-secondary">Volver a mostrar</button>
+        <button id="btn-discover" class="btn btn-primary">Revelar</button>
+        <button id="btn-play-again" class="btn btn-primary">Jugar de nuevo</button>
+      </div>
+    </div>
+  </section>
+
+  <script src="script.js"></script>
+</body>
+</html>
