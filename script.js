@@ -1,5 +1,5 @@
 (function () {
-  const SUITS = ['♥', '♦', '♣', '♠'];
+  const SUITS = ['heart', 'diamond', 'club', 'spade'];
   const REVEAL_SECONDS = 5;
   const COUNTDOWN_START = 3;
   const FLIP_TRANSITION_MS = 600; // must match .flip-card-inner transition duration in style.css
@@ -10,9 +10,7 @@
   };
 
   const card = document.getElementById('card');
-  const cardValueEl = document.getElementById('card-value');
-  const cardCornerTop = document.getElementById('card-corner-top');
-  const cardCornerBottom = document.getElementById('card-corner-bottom');
+  const cardUse = document.getElementById('card-use');
   const countdownOverlay = document.getElementById('countdown-overlay');
   const countdownNumber = document.getElementById('countdown-number');
   const revealCountdownEl = document.getElementById('reveal-countdown');
@@ -54,11 +52,7 @@
     const value = 1 + Math.floor(Math.random() * 10);
     const suit = SUITS[Math.floor(Math.random() * SUITS.length)];
     currentCard = { value, suit };
-    cardValueEl.textContent = `${value}${suit}`;
-    cardCornerTop.textContent = `${value}${suit}`;
-    cardCornerBottom.textContent = `${value}${suit}`;
-    const isRed = suit === '♥' || suit === '♦';
-    card.querySelector('.flip-card-front').classList.toggle('suit-red', isRed);
+    cardUse.setAttribute('href', `#${suit}_${value}`);
   }
 
   function enterReadyState() {
