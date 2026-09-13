@@ -1,5 +1,8 @@
 (function () {
-  const SUITS = ['heart', 'diamond', 'club', 'spade'];
+  const DECK_SUITS = {
+    french: ['heart', 'diamond', 'club', 'spade'],
+    spanish: ['copas', 'oros', 'bastos', 'espadas'],
+  };
   const REVEAL_SECONDS = 5;
   const COUNTDOWN_START = 3;
   const FLIP_TRANSITION_MS = 600; // must match .flip-card-inner transition duration in style.css
@@ -11,6 +14,7 @@
 
   const card = document.getElementById('card');
   const cardUse = document.getElementById('card-use');
+  const cardImgFront = document.getElementById('card-img-front');
   const countdownOverlay = document.getElementById('countdown-overlay');
   const countdownNumber = document.getElementById('countdown-number');
   const revealCountdownEl = document.getElementById('reveal-countdown');
@@ -21,8 +25,11 @@
   const btnReflip = document.getElementById('btn-reflip');
   const btnDiscover = document.getElementById('btn-discover');
   const btnPlayAgain = document.getElementById('btn-play-again');
+  const deckButtons = document.querySelectorAll('[data-deck-option]');
+  const themeToggle = document.getElementById('theme-toggle');
 
   let currentCard = null;
+  let currentDeck = document.documentElement.dataset.deck || 'french';
   let pendingTimeouts = [];
 
   function clearPendingTimeouts() {
@@ -48,11 +55,38 @@
     btnPlayAgain.classList.toggle('hidden', !playAgain);
   }
 
+  function renderCard() {
+    if (!currentCard) return;
+    const suit = DECK_SUITS[currentDeck][currentCard.suitIndex];
+    cardUse.setAttribute('href', `#${suit}_${currentCard.value}`);
+    cardImgFront.src = `spanish-cards/${suit}_${currentCard.value}.png`;
+  }
+
   function dealCard() {
     const value = 1 + Math.floor(Math.random() * 10);
-    const suit = SUITS[Math.floor(Math.random() * SUITS.length)];
-    currentCard = { value, suit };
-    cardUse.setAttribute('href', `#${suit}_${value}`);
+    const suitIndex = Math.floor(Math.random() * 4);
+    currentCard = { value, suitIndex };
+    renderCard();
+  }
+
+  function setDeck(deck) {
+    currentDeck = deck;
+    document.documentElement.dataset.deck = deck;
+    try {
+      localStorage.setItem('deck', deck);
+    } catch (e) {}
+    deckButtons.forEach((btn) => {
+      btn.classList.toggle('active', btn.dataset.deckOption === deck);
+    });
+    renderCard();
+  }
+
+  function setTheme(theme) {
+    document.documentElement.dataset.theme = theme;
+    try {
+      localStorage.setItem('theme', theme);
+    } catch (e) {}
+    themeToggle.textContent = theme === 'light' ? '🌙' : '☀️';
   }
 
   function enterReadyState() {
@@ -61,7 +95,7 @@
     card.classList.remove('is-flipped');
     countdownOverlay.classList.remove('active');
     revealCountdownEl.textContent = '';
-    hintEl.textContent = '¡Muestra la carta a la sala, no la mires tú!';
+    hintEl.textContent = '¡Muestra la carta a los demás, no la mires tú!';
     setButtons({});
 
     function finishReady() {
@@ -149,4 +183,18 @@
   btnDiscover.addEventListener('click', discoverCard);
 
   btnPlayAgain.addEventListener('click', enterReadyState);
+
+  deckButtons.forEach((btn) => {
+    btn.addEventListener('click', () => setDeck(btn.dataset.deckOption));
+  });
+
+  themeToggle.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
+    setTheme(next);
+  });
+
+  deckButtons.forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.deckOption === currentDeck);
+  });
+  setTheme(document.documentElement.dataset.theme || 'dark');
 })();
