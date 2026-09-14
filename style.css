@@ -134,7 +134,7 @@ body {
 }
 
 h1 {
-  font-size: 2rem;
+  font-size: clamp(1.4rem, 5dvh, 2rem);
   margin: 0;
   text-align: center;
   letter-spacing: -0.01em;
@@ -144,6 +144,7 @@ h1 {
   margin: -12px 0 0;
   color: var(--muted);
   text-align: center;
+  font-size: clamp(0.85rem, 2.5dvh, 1rem);
 }
 
 .rules {
@@ -151,14 +152,15 @@ h1 {
   background: var(--panel);
   border: 1px solid var(--panel-border);
   border-radius: 16px;
-  padding: 20px 20px 20px 40px;
+  padding: clamp(12px, 3dvh, 20px) clamp(12px, 3dvh, 20px) clamp(12px, 3dvh, 20px) clamp(28px, 6dvh, 40px);
   margin: 0;
-  line-height: 1.5;
+  font-size: clamp(0.85rem, 2.5dvh, 1rem);
+  line-height: 1.4;
   box-shadow: 0 4px 16px var(--shadow);
 }
 
 .rules li {
-  margin-bottom: 12px;
+  margin-bottom: clamp(6px, 1.5dvh, 12px);
 }
 
 .rules li:last-child {
