@@ -24,7 +24,6 @@
       reflip: 'Volver a mostrar',
       discover: 'Revelar',
       playAgain: 'Jugar de nuevo',
-      deck: { ariaLabel: 'Baraja', spanish: 'Española', french: 'Francesa' },
       themeToggleAria: 'Cambiar tema',
       langToggleAria: 'Cambiar idioma',
       footer: { developedBy: 'Desarrollado por' },
@@ -51,7 +50,6 @@
       reflip: 'Show again',
       discover: 'Reveal',
       playAgain: 'Play again',
-      deck: { ariaLabel: 'Deck', spanish: 'Spanish', french: 'French' },
       themeToggleAria: 'Switch theme',
       langToggleAria: 'Switch language',
       footer: { developedBy: 'Developed by' },
@@ -75,7 +73,7 @@
   };
 
   const card = document.getElementById('card');
-  const cardUse = document.getElementById('card-use');
+  const cardUseFr = document.getElementById('card-use-fr');
   const cardUseEs = document.getElementById('card-use-es');
   const countdownOverlay = document.getElementById('countdown-overlay');
   const countdownNumber = document.getElementById('countdown-number');
@@ -87,12 +85,10 @@
   const btnReflip = document.getElementById('btn-reflip');
   const btnDiscover = document.getElementById('btn-discover');
   const btnPlayAgain = document.getElementById('btn-play-again');
-  const deckButtons = document.querySelectorAll('[data-deck-option]');
   const themeToggle = document.getElementById('theme-toggle');
   const langToggle = document.getElementById('lang-toggle');
 
   let currentCard = null;
-  let currentDeck = document.documentElement.dataset.deck || 'spanish';
   let currentLang = document.documentElement.lang || 'es';
   let currentHint = null; // { key, args } — re-rendered on language switch
   let pendingTimeouts = [];
@@ -124,10 +120,12 @@
   function setLang(lang) {
     currentLang = lang;
     document.documentElement.lang = lang;
+    document.documentElement.dataset.deck = lang === 'en' ? 'french' : 'spanish';
     try {
       localStorage.setItem('lang', lang);
     } catch (e) {}
     applyTranslations();
+    renderCard();
   }
 
   function clearPendingTimeouts() {
@@ -156,7 +154,7 @@
   function renderCard() {
     if (!currentCard) return;
     const suit = SUIT_KEYS[currentCard.suitIndex];
-    cardUse.setAttribute('href', `#${suit}_${currentCard.value}`);
+    cardUseFr.setAttribute('href', `#fr_${suit}_${currentCard.value}`);
     cardUseEs.setAttribute('href', `#es_${suit}_${currentCard.value}`);
   }
 
@@ -164,18 +162,6 @@
     const value = 1 + Math.floor(Math.random() * 10);
     const suitIndex = Math.floor(Math.random() * 4);
     currentCard = { value, suitIndex };
-    renderCard();
-  }
-
-  function setDeck(deck) {
-    currentDeck = deck;
-    document.documentElement.dataset.deck = deck;
-    try {
-      localStorage.setItem('deck', deck);
-    } catch (e) {}
-    deckButtons.forEach((btn) => {
-      btn.classList.toggle('active', btn.dataset.deckOption === deck);
-    });
     renderCard();
   }
 
@@ -282,10 +268,6 @@
 
   btnPlayAgain.addEventListener('click', enterReadyState);
 
-  deckButtons.forEach((btn) => {
-    btn.addEventListener('click', () => setDeck(btn.dataset.deckOption));
-  });
-
   themeToggle.addEventListener('click', () => {
     const next = document.documentElement.dataset.theme === 'light' ? 'dark' : 'light';
     setTheme(next);
@@ -295,9 +277,6 @@
     setLang(currentLang === 'es' ? 'en' : 'es');
   });
 
-  deckButtons.forEach((btn) => {
-    btn.classList.toggle('active', btn.dataset.deckOption === currentDeck);
-  });
   setTheme(document.documentElement.dataset.theme || 'light');
   applyTranslations();
 })();

@@ -1,11 +1,11 @@
 # Third-party assets
 
-The card artwork (embedded inline in `index.html`, and kept as a standalone
-reference copy in `svg-cards.svg`) is a trimmed subset (pip cards 1-10 and the
-card back only) of [SVG-cards](https://github.com/htdebeer/SVG-cards) by David
-Bellot and Huub de Beer, licensed under the GNU Lesser General Public License
-v2.1 (see `LICENSE-svg-cards.txt`). The full, unmodified original is available
-at the link above.
+The French deck artwork (embedded inline in `index.html`, and kept as
+standalone reference copies in `french-deck/`) is from
+[me.uk/cards](https://www.me.uk/cards/) (cards.revk.uk). The author states no
+attribution is required; per that, no credit mark is kept in this project —
+the small credit text and QR code printed on the Ace of Spades have been
+removed from the inlined copy.
 
 The Spanish deck artwork (embedded inline in `index.html`, and kept as a
 standalone reference copy in `baraja-espanola.svg`) is a trimmed subset (pip

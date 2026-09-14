@@ -66,16 +66,6 @@ body {
   gap: 8px;
 }
 
-.deck-toggle {
-  display: flex;
-  background: var(--panel);
-  border: 1px solid var(--panel-border);
-  border-radius: 999px;
-  padding: 3px;
-  gap: 2px;
-  box-shadow: 0 4px 14px var(--shadow);
-}
-
 .chip {
   appearance: none;
   border: none;
@@ -86,11 +76,6 @@ body {
   padding: 8px 14px;
   border-radius: 999px;
   cursor: pointer;
-}
-
-.deck-toggle .chip.active {
-  background: var(--accent);
-  color: #fff;
 }
 
 .theme-toggle {
@@ -232,8 +217,14 @@ h1 {
   perspective: 1200px;
   flex-shrink: 1;
   min-height: 0;
-  width: min(240px, 62vw, calc(50dvh * 0.6912));
-  aspect-ratio: 169.075 / 244.64;
+  /* Spanish (207/321) and French (240/336) cards have different native
+     proportions. Rather than let one dimension diverge between decks, both
+     render into one identical box (a ratio in between the two decks' own
+     ratios) and the art fills it via object-fit: cover on .card-art below,
+     center-cropping each deck's art by a few px — imperceptible in practice
+     — so width and height both stay exactly the same across decks. */
+  height: min(350px, 50dvh, calc(62vw / 0.68));
+  aspect-ratio: 238 / 350;
 }
 
 .flip-card {
@@ -276,19 +267,18 @@ h1 {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: contain;
+  object-fit: cover;
 }
 
-:root[data-deck="spanish"] .card-stage {
-  aspect-ratio: 207 / 321;
-}
-
-:root[data-deck="french"] .deck-art-spanish,
-:root:not([data-deck]) .deck-art-spanish {
+.deck-art-french {
   display: none;
 }
 
-:root[data-deck="spanish"] .deck-art-french {
+:root[data-deck="french"] .deck-art-french {
+  display: block;
+}
+
+:root[data-deck="french"] .deck-art-spanish {
   display: none;
 }
 
