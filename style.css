@@ -51,7 +51,7 @@ body {
   min-height: 100dvh;
   flex-direction: column;
   align-items: center;
-  padding: clamp(52px, 12dvh, 76px) 24px clamp(8px, 4dvh, 24px);
+  padding: clamp(52px, 12dvh, 76px) 24px clamp(28px, 7dvh, 44px);
 }
 
 .settings-bar {
