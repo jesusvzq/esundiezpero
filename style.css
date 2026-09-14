@@ -199,6 +199,14 @@ h1 {
   min-height: calc(2 * clamp(40px, 12dvh, 56px) + clamp(6px, 2dvh, 12px));
 }
 
+#screen-rules .button-row {
+  /* This screen has no card to keep aligned with screen-game and only ever
+     shows one button, so it doesn't need the 2-button reservation above —
+     give that space back to .content-main so the rules text has more room
+     before it needs to scroll. */
+  min-height: auto;
+}
+
 .hidden {
   display: none !important;
 }
