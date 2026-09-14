@@ -13,14 +13,17 @@
           theme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
         }
         document.documentElement.dataset.theme = theme;
-        document.documentElement.dataset.deck = localStorage.getItem('deck') || 'french';
+        // Spanish deck temporarily disabled in production while it's improved;
+        // force French regardless of any deck previously saved in localStorage.
+        document.documentElement.dataset.deck = 'french';
       } catch (e) {}
     })();
   </script>
 </head>
 <body>
   <div class="settings-bar">
-    <div class="deck-toggle" role="group" aria-label="Baraja">
+    <!-- Spanish deck temporarily disabled in production while it's improved; deck-toggle hidden for now. -->
+    <div class="deck-toggle hidden" role="group" aria-label="Baraja">
       <button type="button" class="chip" data-deck-option="french">Francesa</button>
       <button type="button" class="chip" data-deck-option="spanish">Española</button>
     </div>
