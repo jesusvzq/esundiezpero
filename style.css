@@ -51,7 +51,7 @@ body {
   min-height: 100dvh;
   flex-direction: column;
   align-items: center;
-  padding: clamp(56px, 12dvh, 76px) 24px clamp(12px, 4dvh, 24px);
+  padding: clamp(52px, 12dvh, 76px) 24px clamp(8px, 4dvh, 24px);
 }
 
 .settings-bar {
@@ -118,7 +118,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: clamp(8px, 3dvh, 20px);
+  gap: clamp(4px, 3dvh, 20px);
 }
 
 .content-main {
@@ -129,7 +129,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: safe center;
-  gap: clamp(8px, 3dvh, 20px);
+  gap: clamp(4px, 3dvh, 20px);
   overflow-y: auto;
 }
 
@@ -172,7 +172,7 @@ h1 {
   padding: clamp(10px, 2.5dvh, 16px) 24px;
   font-size: clamp(0.95rem, 3dvh, 1.1rem);
   font-weight: 600;
-  min-height: clamp(44px, 12dvh, 56px);
+  min-height: clamp(40px, 12dvh, 56px);
   width: 100%;
   max-width: 320px;
   cursor: pointer;
@@ -203,13 +203,13 @@ h1 {
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: clamp(8px, 2dvh, 12px);
+  gap: clamp(6px, 2dvh, 12px);
   /* Reserve room for the max simultaneous buttons (2), aligned from the top,
      so the first button always lands in the same spot on every screen and
      hiding/showing buttons never shifts the card or reflows the layout.
      Scales with the buttons' own clamped height so the reservation shrinks
      in step with them instead of forcing a scroll on short viewports. */
-  min-height: calc(2 * clamp(44px, 12dvh, 56px) + clamp(8px, 2dvh, 12px));
+  min-height: calc(2 * clamp(40px, 12dvh, 56px) + clamp(6px, 2dvh, 12px));
 }
 
 .hidden {
