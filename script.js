@@ -163,7 +163,7 @@
     clearPendingTimeouts();
     revealCountdownEl.textContent = '';
     card.classList.add('is-flipped');
-    hintEl.textContent = '¡La carta está al descubierto!';
+    hintEl.textContent = `¡Es un ${currentCard.value}!`;
     setButtons({ playAgain: true });
   }
 
