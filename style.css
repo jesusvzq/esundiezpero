@@ -230,7 +230,7 @@ h1 {
   perspective: 1200px;
   flex-shrink: 1;
   min-height: 0;
-  width: min(240px, 62vw, calc(34dvh * 0.6912));
+  width: min(240px, 62vw, calc(50dvh * 0.6912));
   aspect-ratio: 169.075 / 244.64;
 }
 
