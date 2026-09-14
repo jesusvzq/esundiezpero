@@ -51,7 +51,7 @@ body {
   min-height: 100dvh;
   flex-direction: column;
   align-items: center;
-  padding: 76px 24px 24px;
+  padding: clamp(56px, 12dvh, 76px) 24px clamp(12px, 4dvh, 24px);
 }
 
 .settings-bar {
@@ -118,7 +118,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 20px;
+  gap: clamp(8px, 3dvh, 20px);
 }
 
 .content-main {
@@ -128,8 +128,8 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  gap: 20px;
+  justify-content: safe center;
+  gap: clamp(8px, 3dvh, 20px);
   overflow-y: auto;
 }
 
@@ -169,10 +169,10 @@ h1 {
   appearance: none;
   border: none;
   border-radius: 14px;
-  padding: 16px 24px;
-  font-size: 1.1rem;
+  padding: clamp(10px, 2.5dvh, 16px) 24px;
+  font-size: clamp(0.95rem, 3dvh, 1.1rem);
   font-weight: 600;
-  min-height: 56px;
+  min-height: clamp(44px, 12dvh, 56px);
   width: 100%;
   max-width: 320px;
   cursor: pointer;
@@ -198,15 +198,18 @@ h1 {
 
 .button-row {
   width: 100%;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  gap: 12px;
+  gap: clamp(8px, 2dvh, 12px);
   /* Reserve room for the max simultaneous buttons (2), aligned from the top,
      so the first button always lands in the same spot on every screen and
-     hiding/showing buttons never shifts the card or reflows the layout. */
-  min-height: 124px;
+     hiding/showing buttons never shifts the card or reflows the layout.
+     Scales with the buttons' own clamped height so the reservation shrinks
+     in step with them instead of forcing a scroll on short viewports. */
+  min-height: calc(2 * clamp(44px, 12dvh, 56px) + clamp(8px, 2dvh, 12px));
 }
 
 .hidden {
@@ -219,12 +222,15 @@ h1 {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 14px;
+  gap: clamp(6px, 2dvh, 14px);
+  min-height: 0;
 }
 
 .card-stage {
   perspective: 1200px;
-  width: min(240px, 62vw);
+  flex-shrink: 1;
+  min-height: 0;
+  width: min(240px, 62vw, calc(34dvh * 0.6912));
   aspect-ratio: 169.075 / 244.64;
 }
 
@@ -307,7 +313,7 @@ h1 {
 .reveal-countdown {
   min-height: 1.4em;
   margin: 0;
-  font-size: 3rem;
+  font-size: clamp(1.5rem, 6dvh, 3rem);
   font-weight: 800;
   color: var(--accent);
   line-height: 1;
