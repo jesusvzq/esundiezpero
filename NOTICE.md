@@ -14,5 +14,5 @@ own origin, of
 ["Baraja española.svg"](https://commons.wikimedia.org/wiki/File:Baraja_espa%C3%B1ola.svg)
 by Germarquezm (Wikimedia Commons), licensed under
 [CC BY-SA 3.0](https://creativecommons.org/licenses/by-sa/3.0/); this
-derivative is distributed under the same license. The original file
-(`Baraja_española.svg`) is kept in the project root for provenance.
+derivative is distributed under the same license. The unmodified original is
+available at the link above.
