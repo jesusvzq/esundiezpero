@@ -1,8 +1,9 @@
 (function () {
-  const DECK_SUITS = {
-    french: ['heart', 'diamond', 'club', 'spade'],
-    spanish: ['copas', 'oros', 'bastos', 'espadas'],
-  };
+  // Both decks share the same suit-index order (heart~copas, diamond~oros,
+  // club~bastos, spade~espadas) so switching decks mid-round keeps the same
+  // hidden card. The Spanish deck's inlined ids reuse these same suit words
+  // internally (see baraja-espanola.svg), just prefixed with "es_".
+  const SUIT_KEYS = ['heart', 'diamond', 'club', 'spade'];
   const REVEAL_SECONDS = 5;
   const COUNTDOWN_START = 3;
   const FLIP_TRANSITION_MS = 600; // must match .flip-card-inner transition duration in style.css
@@ -14,7 +15,7 @@
 
   const card = document.getElementById('card');
   const cardUse = document.getElementById('card-use');
-  const cardImgFront = document.getElementById('card-img-front');
+  const cardUseEs = document.getElementById('card-use-es');
   const countdownOverlay = document.getElementById('countdown-overlay');
   const countdownNumber = document.getElementById('countdown-number');
   const revealCountdownEl = document.getElementById('reveal-countdown');
@@ -29,7 +30,7 @@
   const themeToggle = document.getElementById('theme-toggle');
 
   let currentCard = null;
-  let currentDeck = document.documentElement.dataset.deck || 'french';
+  let currentDeck = document.documentElement.dataset.deck || 'spanish';
   let pendingTimeouts = [];
 
   function clearPendingTimeouts() {
@@ -57,9 +58,9 @@
 
   function renderCard() {
     if (!currentCard) return;
-    const suit = DECK_SUITS[currentDeck][currentCard.suitIndex];
+    const suit = SUIT_KEYS[currentCard.suitIndex];
     cardUse.setAttribute('href', `#${suit}_${currentCard.value}`);
-    cardImgFront.src = `spanish-cards/${suit}_${currentCard.value}.png`;
+    cardUseEs.setAttribute('href', `#es_${suit}_${currentCard.value}`);
   }
 
   function dealCard() {
@@ -196,5 +197,5 @@
   deckButtons.forEach((btn) => {
     btn.classList.toggle('active', btn.dataset.deckOption === currentDeck);
   });
-  setTheme(document.documentElement.dataset.theme || 'dark');
+  setTheme(document.documentElement.dataset.theme || 'light');
 })();
